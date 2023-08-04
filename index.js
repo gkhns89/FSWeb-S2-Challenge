@@ -99,16 +99,18 @@ function cumleKur(
 
 /* (Oto test yok) cumleKur fonksiyonuna yalnızca 1 parametre göndererek "Hello World!" stringini elde edin, 
 sonucu konsolde gözlemleyin */
-
+console.log("g1)",cumleKur("Hello World!"));
 /* (Oto test yok) cumleKur fonksiyonuna yalnızca 2 parametre göndererek "Hello World!" stringini elde edin, 
 sonucu konsolde gözlemleyin */
-
+console.log("g2)",cumleKur("Hello","World!"));
 /* (Oto test var) cumleKur fonksiyonuna 5 parametre göndererek "Ben iyi bir yazılımcı olacağım!" stringini 
 elde edin, sonucu `bircumle` değişkenine atayın ve konsolde gözlemleyin */
+
 var bircumle;
 
 /* kodlar buraya */
-
+bircumle = cumleKur("Ben ", "iyi ", "bir ", "yazılımcı ","olacağım!");
+console.log("g3)", bircumle);
 //		Sayfanın en üstünde global olarak tanımlanmış `cumleler` adında bir dizi bulunmaktadır. Bu dizinin
 // içinde en çok 5 en az 1 adet string bulunan diziler bulunmaktadır.Aşağıdaki görevlerde aksi
 // belirtilmedikçe bu dizi kullanılacaktır.
@@ -128,9 +130,17 @@ var bircumle;
 			5. Oluşturulan yeni dizi döndürülecek.
 	*/
 
-function cumlelereDonustur(/* kodlar buraya */) {
+function cumlelereDonustur(cumleDizisi, ayrac=",")
+ {
   /* kodlar buraya */
+  
+const sonuc = cumleDizisi.map((kelimeDizisi) => kelimeDizisi.join(ayrac));
+
+
+return sonuc;
 }
+console.log("G1", cumlelereDonustur(cumleler, " "));
+console.log("G1-2", cumlelereDonustur(cumleler));
 
 /* GÖREV 2:
 		paragrafOlustur fonksiyonuna aşağıdakileri uygulayın.
@@ -145,9 +155,18 @@ function cumlelereDonustur(/* kodlar buraya */) {
 			6. Oluşturulan paragraf döndürülecek
 	*/
 
-function paragrafOlustur(/* kodlar buraya */) {
-  /* kodlar buraya */
+function paragrafOlustur(cumleDizisi, cumleKurCallBack,cumlelereDonusturCallBack) {
+  const yeniCumleler = cumlelereDonusturCallBack(cumleDizisi," ");
+
+  console.log("yeniCumleler",yeniCumleler);
+
+   
+    return cumleKurCallBack(yeniCumleler[1],yeniCumleler[3],yeniCumleler[5],yeniCumleler[7],yeniCumleler[9]);
+
 }
+console.log("G2", paragrafOlustur(cumleler,cumleKur,cumlelereDonustur));
+
+
 
 /* 	GÖREV 3:
 		Yukarıda isimleri sebzeler ve meyveler olan 2 dizi bulunmaktadır. Bu dizileri kullanarak aşağıdaki görevleri tamamlayın.
@@ -155,6 +174,12 @@ function paragrafOlustur(/* kodlar buraya */) {
  */
 //3a çözümü
 /* kodlar buraya */
+console.log("G3a-pre",meyveler);
+
+meyveler.pop();
+meyveler.shift();
+
+console.log("G3a-post", meyveler);
 
 /* 			3b.  Bir tavşan ve bir kirpi arkadaşlar sebzeler dizimizin peşine düştü. Tavşan => 🐇 , Kirpi=> 🦔 , 
 Tavşanla kirpi sebzeleri ele geçirmek için bir plan kurdular. Tavşan diziye önden saldıracak, kirpi ise 
@@ -162,15 +187,22 @@ arkalarından dolaşacak. Varsayalım ki arkadaşların planları başarılı ol
 Kirpiyi dizinin son elemanına ekleyin 🦔
  */
 //3b çözümü
-/* kodlar buraya */
+console.log("G3b-pre",sebzeler);
+
+sebzeler.unshift("🐇");
+sebzeler.push("🦔");
+
+console.log("G3b-post", sebzeler);
 
 /* 			3c. manav isminde bir dizi oluşturun.`meyveler` dizisi ilk elemanlara, `sebzeler` dizisi son 
 elemanlara denk gelecek şekilde, iki diziyi birleştirip sonucu manav dizisine aktarın. (.concat metodu)
  */
 //3c çözümü
 /* kodlar buraya */
-
 var manav;
+manav = [...meyveler,...sebzeler];
+
+console.log("G3c", manav);
 
 /* 	GÖREV 4:
 		Yeni kurulmuş bir mesajlaşma startup firması atılan mesajları emojilerle zenginleştirmek istiyor. 
@@ -189,8 +221,15 @@ var manav;
 			4. elde edilen string döndürülecek
  */
 
-function emojileriDonustur(/* kodlar buraya */) {
-  /* kodlar buraya */
+function emojileriDonustur(biMesaj, emojiKılavuzu) {
+  let sent = biMesaj;
+  let semboller = Object.keys(emojiKılavuzu);
+  for (let i = 0; i < semboller.length; i++) {
+    sent = sent.replaceAll(semboller[i].toLowerCase(), emojiKılavuzu[semboller[i]]);
+    sent = sent.replaceAll(semboller[i].toUpperCase(), emojiKılavuzu[semboller[i]]);
+    
+  }
+  return sent;
 }
 
 /*  Bu satırın aşağısındaki kodları lütfen değiştirmeyin  */
